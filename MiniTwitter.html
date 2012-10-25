@@ -46,10 +46,13 @@
         var value = $('#twitterid').val();
         checkboxString = checkboxString.replace('TWITTERNAME',value) + value + "</input>";
 
-        $('#tweeterids').append(
-            twitterId.replace('TWITTER_ID', checkboxString)
-        )
-        updateFeeds();
+        // Check whether the ID is already present or not.
+        if(document.getElementById(value) === null) {
+            $('#tweeterids').append(
+                twitterId.replace('TWITTER_ID', checkboxString)
+            )
+            updateFeeds();
+        }
     }
 
     updateFeeds = function() {
@@ -102,7 +105,7 @@
         <div id="username">
             Twitter ID: <input type="text" id="twitterid">
             <input type="submit" value="Follow Tweets" onclick="followTweeter()">
-            <input type="submit" onclick="updateFeeds()">
+            <!--<input type="submit" onclick="updateFeeds()">-->
             <br>
         </div>
     </div>
