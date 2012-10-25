@@ -42,16 +42,23 @@
 <script>
     followTweeter = function() {
         var twitterId = '<li>TWITTER_ID</li>';
+        var checkboxString = "<input type='checkbox' id='TWITTERNAME' value='TWITTERNAME' checked='true' onclick='updateFeeds()'>";
+        var value = $('#twitterid').val();
+        checkboxString = checkboxString.replace('TWITTERNAME',value) + value + "</input>";
+
         $('#tweeterids').append(
-            twitterId.replace('TWITTER_ID', $('#twitterid').val())
+            twitterId.replace('TWITTER_ID', checkboxString)
         )
         updateFeeds();
     }
 
     updateFeeds = function() {
-        $('li').each(function(index) {
-            var twitId = $(this).text();
-            FeedsQueue.getTweets(twitId);
+        FeedsQueue.feeds.length = 0;
+        $('li').each(function(index, value) {
+            var twitId = $(value).text();
+            if(document.getElementById(twitId).checked) {
+                FeedsQueue.getTweets(twitId);
+            }
         });
     }
 
@@ -70,11 +77,15 @@
         }
     }
 
+    var displayFeeds = function(){
+        $('#recenttweets').empty();
+        displayTweets('#recentTweets');
+    }
+
     refreshDisplay = function() {
         setInterval(function(){
-            $('#recenttweets').empty();
-            displayTweets('#recentTweets');
-        }, 3000);
+            displayFeeds();
+        }, 1000);
     }
 </script>
 
