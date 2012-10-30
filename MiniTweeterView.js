@@ -6,28 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 updateTweeterList = function() {
-    addNewTweeterItem(document.getElementById("twitterid").value);
+    userListModel.addNewUserToFollow(document.getElementById("twitterid").value);
+}
+
+function usersListModelChanged() {
     updateFeeds(displayFeeds);
-}
-
-function createNewTweeterEntry(newTwitterId) {
-    var checkBoxElement = createCheckBox(newTwitterId);
-    checkBoxElement.checked = true;
-
-    var labelElement = createLabelForCheckBox(newTwitterId, newTwitterId);
-
-    var newListItem = document.createElement("li");
-    newListItem.appendChild(checkBoxElement);
-    newListItem.appendChild(labelElement);
-    return newListItem;
-}
-
-addNewTweeterItem = function(newTwitterId) {
-
-    if(doesIdExists(newTwitterId) == false) {
-
-        document.getElementById("tweeterids").appendChild(createNewTweeterEntry(newTwitterId));
-    }
 }
 
 updateFeeds = function(onSuccessCallback) {
@@ -50,16 +33,17 @@ displayTweets = function(divisionId) {
     for(var index = 0; index < FeedsQueue.feeds.length; index++)
     {
         var userfeeds = FeedsQueue.feeds[index];
-        for(var i = 0; i < userfeeds.value.length; i++) {
-            var feed = userfeeds.value[i];
 
+        var tweetList = userfeeds.value.tweetList;
+        for(var i = 0; i < tweetList.length; i++) {
             $('#recenttweets').append(
-                html.replace('TWEET_TEXT', feed.text)
-                    .replace(/USER/g, feed.user.screen_name)
-                    .replace('AGO', feed.created_at)
-                    .replace(/ID/g, feed.id_str)
+                html.replace('TWEET_TEXT', tweetList[i].tweetText)
+                    .replace(/USER/g, userfeeds.value.screenName)
+                    .replace('AGO', tweetList[i].creationDate)
+                    .replace(/ID/g, userfeeds.value.strId)
             );
         }
+
     }
 }
 
