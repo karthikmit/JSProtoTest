@@ -28,7 +28,7 @@ FeedsQueue = {
         $.grep(this.feeds, function(e) {
             isExistsFlag = e.key == twitterId.toLowerCase();
         });
-        alert(isExistsFlag + "");
+
         return isExistsFlag;
     },
 
