@@ -2,18 +2,15 @@
  * Created with JetBrains WebStorm.
  * User: karthikeyan.s
  * Date: 10/30/12
- * Time: 1:19 PM
+ * Time: 5:49 PM
  * To change this template use File | Settings | File Templates.
  */
-updateTweeterList = function() {
-    userListModel.addNewUserToFollow(document.getElementById("twitterid").value);
+
+TweetsView = function() {
+
 }
 
-function usersListModelChanged() {
-    updateFeeds(displayFeeds);
-}
-
-updateFeeds = function(onSuccessCallback) {
+TweetsView.prototype.updateFeeds = function(onSuccessCallback) {
     FeedsQueue.feeds.length = 0;
     $('li').each(function(index, value) {
         var twitId = $(value).text();
@@ -27,7 +24,7 @@ updateFeeds = function(onSuccessCallback) {
     });
 }
 
-displayTweets = function(divisionId) {
+TweetsView.prototype.displayTweets = function(divisionId) {
     var html = '<div class="tweet">TWEET_TEXT<div class="time">AGO</div> <br>';
 
     for(var index = 0; index < FeedsQueue.feeds.length; index++)
@@ -43,11 +40,12 @@ displayTweets = function(divisionId) {
                     .replace(/ID/g, userfeeds.value.strId)
             );
         }
-
     }
 }
 
-displayFeeds = function(){
+TweetsView.prototype.displayFeeds = function(){
     $('#recenttweets').empty();
-    displayTweets('#recentTweets');
+    tweetsView.displayTweets('#recentTweets');
 }
+
+var tweetsView = new TweetsView();

@@ -13,14 +13,14 @@ UserListModel = function() {
 UserListModel.prototype.addNewUserToFollow = function(twitterId) {
     this.usersList.push(twitterId);
     usersListView.newUserAdded(twitterId);
-    usersListModelChanged();
+    tweetsView.updateFeeds(tweetsView.displayFeeds);
 }
 
 UserListModel.prototype.removeUser = function(twitterId) {
     this.usersList = $.grep(this.usersList, function(e) {
         return e !== twitterId;
     })
-    usersListModelChanged();
+    tweetsView.updateFeeds(tweetsView.displayFeeds);
 }
 
 var userListModel = new UserListModel();
