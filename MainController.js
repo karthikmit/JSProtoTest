@@ -6,16 +6,17 @@
  * To change this template use File | Settings | File Templates.
  */
 (function() {
-    var NewUserAddController = function() {
+    var MainController = function() {
 
     }
 
-    NewUserAddController.prototype.addUserClicked = function(newtwitterid) {
+    MainController.prototype.addUserClicked = function(newtwitterid) {
         newtwitterid = newtwitterid || "";
         if(newtwitterid !== "") {
             userListModel.addNewUserToFollow(newtwitterid);
+            MinTweet.tweetsModel.populateTweets(newtwitterid);
         }
     }
 
-    newUserAddController = new NewUserAddController();
+    mainController = new MainController();
 }());

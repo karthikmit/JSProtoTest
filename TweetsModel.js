@@ -5,18 +5,19 @@
  * Time: 9:28 AM
  * To change this template use File | Settings | File Templates.
  */
+var MinTweet = MinTweet || {}
 
-FeedsQueue = {
+MinTweet.tweetsModel = {
     feeds : [],
 
-    getTweets : function(twitterId, onSuccess) {
+    populateTweets : function(twitterId) {
         var numTweets = 5;
         if(this.isExists(twitterId) !== true) {
             tweetFetcher.fetchTweets(twitterId, numTweets, function(tweetsList) {
                 tweetsList = tweetsList || [];
                 if(tweetsList.tweetList.length > 0){
-                    FeedsQueue.feeds.push({key:tweetsList.screenName.toLowerCase(), value:tweetsList});
-                    onSuccess();
+                    MinTweet.tweetsModel.feeds.push({key:tweetsList.screenName.toLowerCase(), value:tweetsList});
+                    tweetsView.displayFeeds(MinTweet.tweetsModel.feeds);
                 }
                 else {
                     alert("No Messages received...")
@@ -25,11 +26,11 @@ FeedsQueue = {
         }
     },
 
-    removeTweets : function(twitterId, onSuccess) {
+    removeTweets : function(twitterId) {
         this.feeds = $.grep(this.feeds, function(element) {
             return element.key !== twitterId.toLowerCase();
         });
-        onSuccess();
+        tweetsView.displayFeeds(MinTweet.tweetsModel.feeds);
     },
 
     isExists : function(twitterId) {

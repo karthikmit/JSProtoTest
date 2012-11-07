@@ -17,7 +17,13 @@
     UsersListView.prototype.createNewTweeterEntry = function(newTwitterId) {
         var checkBoxElement = createCheckBox(newTwitterId);
         checkBoxElement.checked = true;
-        checkBoxElement.setAttribute("onchange", "tweetsView.updateFeeds(tweetsView.displayFeeds)");
+        checkBoxElement.addEventListener('change', function(){
+            if(checkBoxElement.checked) {
+                MinTweet.tweetsModel.populateTweets(newTwitterId);
+            }else {
+                MinTweet.tweetsModel.removeTweets(newTwitterId);
+            }
+        });
 
         var labelElement = createLabelForCheckBox(newTwitterId, newTwitterId);
 

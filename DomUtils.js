@@ -8,7 +8,7 @@
 
 window.onload = function() {
     document.getElementById("newuser").onclick = function() {
-        newUserAddController.addUserClicked(document.getElementById("twitterid").value);
+        mainController.addUserClicked(document.getElementById("twitterid").value);
     }
 }
 

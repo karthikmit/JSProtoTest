@@ -8,36 +8,14 @@
 
 (function() {
     var TweetsView = function() {
-        userListModel.subscribe(this.update);
-        self = this;
     }
 
-    TweetsView.self = this;
-
-    TweetsView.prototype.update = function() {
-        self.updateFeeds(self.displayFeeds);
-    }
-
-    TweetsView.prototype.updateFeeds = function(onSuccessCallback) {
-        FeedsQueue.feeds.length = 0;
-        $('li').each(function(index, value) {
-            var twitId = $(value).text();
-            if(document.getElementById(twitId).checked) {
-                FeedsQueue.getTweets(twitId, onSuccessCallback);
-            }
-            else
-            {
-                FeedsQueue.removeTweets(twitId, onSuccessCallback);
-            }
-        });
-    }
-
-    TweetsView.prototype.displayTweets = function(divisionId) {
+    TweetsView.prototype.displayTweets = function(allFeeds) {
         var html = '<div class="tweet">TWEET_TEXT<div class="time">AGO</div> <br>';
 
-        for(var index = 0; index < FeedsQueue.feeds.length; index++)
+        for(var index = 0; index < allFeeds.length; index++)
         {
-            var userfeeds = FeedsQueue.feeds[index];
+            var userfeeds = allFeeds[index];
 
             var tweetList = userfeeds.value.tweetList;
             for(var i = 0; i < tweetList.length; i++) {
@@ -51,9 +29,9 @@
         }
     }
 
-    TweetsView.prototype.displayFeeds = function(){
+    TweetsView.prototype.displayFeeds = function(allFeeds){
         $('#recenttweets').empty();
-        tweetsView.displayTweets('#recentTweets');
+        tweetsView.displayTweets(allFeeds);
     }
 
     tweetsView = new TweetsView();

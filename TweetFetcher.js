@@ -26,7 +26,7 @@
 
                     success: function(data, textStatus, xhr){
                         // append tweets into feeds queue.
-                        var tweetsList = new UserTweetList();
+                        var tweetsList = new TweetList();
                         tweetsList.copyTweets(data);
                         tweetFetcher.feedsCache.push({key:tweetsList.screenName, value:tweetsList});
 
