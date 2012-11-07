@@ -5,11 +5,8 @@
     <link rel="stylesheet" type="text/css" href="MiniTweeter.css">
 </head>
 
-<!-- Letz have Ajax to make JSON calls -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
-
 <script src="TweetFetcher.js"></script>
-<script src="MiniTweeterView.js"></script>
 <script src="TwitterFeed.js"></script>
 <script src="DomUtils.js"></script>
 <script src="Tweet.js"></script>
@@ -19,16 +16,6 @@
 <script src="TweetsView.js"></script>
 <script src="NewUserController.js"></script>
 
-
-<script>
-    function testMe()
-    {
-        var testTweet = new Tweet();
-        testTweet.screenName = "Karthik";
-        alert(testTweet.screenName);
-    }
-</script>
-
 <body>
 <div class="wrapper">
 
@@ -37,9 +24,7 @@
 
             <div id="username">
                 Twitter ID: <input type="text" id="twitterid"/>
-                <input type="submit" value="Follow Tweets" onclick="newUserAddController.addUserClicked()"/>
-                <input type="submit" value="Just4Test" onclick="testMe()"/>
-                <br>
+                <input type="submit" id="newuser" value="Follow Tweets"/><br>
             </div>
         </div>
 

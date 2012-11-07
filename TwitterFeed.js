@@ -13,8 +13,14 @@ FeedsQueue = {
         var numTweets = 5;
         if(this.isExists(twitterId) !== true) {
             tweetFetcher.fetchTweets(twitterId, numTweets, function(tweetsList) {
-                FeedsQueue.feeds.push({key:tweetsList.screenName.toLowerCase(), value:tweetsList});
-                onSuccess();
+                tweetsList = tweetsList || [];
+                if(tweetsList.tweetList.length > 0){
+                    FeedsQueue.feeds.push({key:tweetsList.screenName.toLowerCase(), value:tweetsList});
+                    onSuccess();
+                }
+                else {
+                    alert("No Messages received...")
+                }
             });
         }
     },

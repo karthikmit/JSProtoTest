@@ -5,13 +5,17 @@
  * Time: 5:59 PM
  * To change this template use File | Settings | File Templates.
  */
+(function() {
+    var NewUserAddController = function() {
 
-NewUserAddController = function() {
+    }
 
-}
+    NewUserAddController.prototype.addUserClicked = function(newtwitterid) {
+        newtwitterid = newtwitterid || "";
+        if(newtwitterid !== "") {
+            userListModel.addNewUserToFollow(newtwitterid);
+        }
+    }
 
-NewUserAddController.prototype.addUserClicked = function() {
-    userListModel.addNewUserToFollow(document.getElementById("twitterid").value);
-}
-
-var newUserAddController = new NewUserAddController();
+    newUserAddController = new NewUserAddController();
+}());
